@@ -296,8 +296,10 @@
             </div>`,
             `
             <h1 class="main-container-user-title">Questão 7</h1>
+            <span class="main-container-user-content">Valor da expressão somatorio(i=1,i=n,produtorio(j=i,j=n,calcula(i+j))</span>
+            <span class="main-container-user-content">Insira o valor de in, o valor de jn, e uma função em x</span>
             <div class="row">
-                <input id="questao7" class="main-container-user-input" type="text" placeholder="">
+                <input id="questao7" class="main-container-user-input" type="text" placeholder="Exemplo 2 2 2*x">
                 <button class="main-container-user-button" onclick="Questão7()">Enviar</button>
             </div>`,
             `
@@ -639,6 +641,65 @@
         }
 
         function Questão7() {
+
+            const numero = document.getElementById("questao7").value.split(" ")
+            const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
+            const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
+
+            iFinal = parseInt(numero[0]);
+            jFinal = parseInt(numero[1]);
+            expressao = numero[2]
+
+            function Iterativo(){
+                
+                let resultadoSomatorio = 0;
+                for (let i = 1; i <= iFinal; i++) {
+                    let resultadoProd = 1;
+                    for (let j = i; j <= jFinal; j++) {
+                        x = i+j
+                        calculaExpressao = eval(expressao)
+                        resultadoProd *= calculaExpressao;
+                    }
+                    resultadoSomatorio += resultadoProd
+                    
+                }
+                return resultadoSomatorio;
+            }
+
+            function Recursivo(){
+                
+                let resultadoSomatorio = 0;
+                function somatorio(i){
+                    if(i < iFinal){
+                        resultadoSomatorio += produtorio(i,i)
+                        somatorio(i+1)
+                    }
+                    if (i == iFinal){
+                        resultadoSomatorio += produtorio(i,i)
+                    }
+                }
+
+                
+                function produtorio(i,j){
+                    if(j < jFinal){
+                        x = i+j
+                        calculaExpressao = eval(expressao)
+                        return calculaExpressao*produtorio(i,j+1)
+                    }
+                    if (j == jFinal){
+                        x = i+j
+                        calculaExpressao = eval(expressao)
+                        return calculaExpressao
+                    }
+
+                }
+                somatorio(1)
+                return resultadoSomatorio;
+            }
+
+            dropTableInputIterativo.value = `O resultado é ${Iterativo()}`;
+            dropTableInputRecursivo.value = `O resultado é ${Recursivo()}`;
+
             // Dada uma funcão calcula(x), obter:
             // somatorio(i = 1, i = n, produtorio(j = i, j = n, calcula(i + j))
         }
