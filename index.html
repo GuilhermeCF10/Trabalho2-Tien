@@ -423,32 +423,37 @@
 
         function Questão2() {
 
-            let valorIterativo = [];
+            let valorIterativo;
             let valorRecursivo = [];
             const numero = document.getElementById("questao2").value.split(" ")
             const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
             const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
 
-            num = parseInt(numero).toString();
+            num = parseInt(numero[0]).toString();
+            p = parseInt(numero[1])
+
 
             function Iterativo() {
-                for (i = num.length; i >= 0; --i) {
-                    valorIterativo.push(num[num.length - i].toString() + " P=" + (i - 1).toString())                   
+                for (i = 0; i <= p; ++i) {
+                    if( i == p){
+                        valorIterativo = "Em p= "+ p + ", Temos o digito: "+ num[(num.length-1) - i];                  
+                    }
                 }
             }
 
 
-            j = parseInt(numero).toString().length
-            function Recursivo() {
-                if (j > 0) {
-                    valorRecursivo.push(num[num.length - j].toString() + " P=" + (j - 1).toString())
-                    j -= 1;
-                    return Recursivo()
+            function Recursivo(num, j) {
+                if (j != p) {
+                    
+                    return Recursivo(num, j+1)
+                }
+                if(j == p){
+                    valorRecursivo = "Em p= "+ p + ", Temos o digito: "+ num[(num.length-1) - j]
                 }
             }
 
             Iterativo()
-            Recursivo()
+            Recursivo(num,0)
             //Precisa Ajustar, no momento esta apenas escrevendo o array
             //algum tipo de foreach
             dropTableInputIterativo.value = `${valorIterativo}`;
@@ -682,7 +687,7 @@
             
             
             
-           dropTableInputIterativo.value = `O índice é ${Iterativo(numero[0], numero[1], array)}`;            
+            dropTableInputIterativo.value = `O índice é ${Iterativo(numero[0], numero[1], array)}`;            
             dropTableInputRecursivo.value = `O índice é ${Recursivo(numero[0], numero[1], array, 10, 0)}`;
             
 
