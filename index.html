@@ -308,7 +308,7 @@
             <div class="row">
                 <input id="questao8" class="main-container-user-input" type="text" placeholder="Exemplo: 2 9">
                 <button class="main-container-user-button" onclick="Questão8()">Enviar</button>
-            </div>`,]
+            </div>`]
 
         function onLoadPage() {
             const userSection = document.getElementsByClassName("main-container-user")[0]
@@ -652,7 +652,7 @@
             function getRandom(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
-
+ 
             for (let i = 0 ; i < 10 ; i++){
                 array.push(getRandom(0,9));
             }
@@ -685,11 +685,9 @@
                     return Recursivo(n,m,array,tam,k+1);
                 }
             }
-            
-            
-            
-            dropTableInputIterativo.value = `O índice é ${Iterativo(numero[0], numero[1], array)}`;            
-            dropTableInputRecursivo.value = `O índice é ${Recursivo(numero[0], numero[1], array, 10, 0)}`;
+
+            dropTableInputIterativo.value = `Array [${array}] e o índice é ${Iterativo(numero[0], numero[1], array)}`;            
+            dropTableInputRecursivo.value = `Array [${array}] e o índice é ${Recursivo(numero[0], numero[1], array, 10, 0)}`;
             
 
             
